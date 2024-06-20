@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 class Artist {
   final String imageName;
