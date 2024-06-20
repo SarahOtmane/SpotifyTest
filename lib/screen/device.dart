@@ -1,5 +1,6 @@
 // screen/device.dart
 import 'package:flutter/material.dart';
+import 'package:spotify/screen/like.dart';
 import 'home.dart';
 
 class DeviceScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   int _currentScreen = 0;
   final List<Widget> _screenList = [
     const HomeScreen(),
+    const LikeScreen(),
   ];
 
   @override
