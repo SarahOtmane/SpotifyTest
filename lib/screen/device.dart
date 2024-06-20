@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:spotify/screen/listArtist.dart';
 
 import 'home.dart';
-import 'like.dart';
 import 'concerts.dart';
 
 class DeviceScreen extends StatefulWidget {
@@ -18,7 +17,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
     const HomeScreen(),
     const LikeScreen(),
     const ConcertsScreen(),
-    const ListArtistScreen(),
+    ListArtistScreen(),
   ];
 
   @override
