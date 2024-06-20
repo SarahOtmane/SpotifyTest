@@ -1,69 +1,60 @@
 import 'package:flutter/material.dart';
-import '../components/searchBar.dart';
 import '../components/artistCard.dart';
+import '../data/artistData.dart';
 
 class ListArtistScreen extends StatefulWidget {
-  const ListArtistScreen({super.key});
-
   @override
   _ListArtistScreenState createState() => _ListArtistScreenState();
 }
 
 class _ListArtistScreenState extends State<ListArtistScreen> {
-
-  // Un contrôleur pour le champ de recherche
-  TextEditingController _searchController = TextEditingController();
-
-  List<String> artists = [
-    "Taylor Swift",
-    "Ed Sheeran",
-    "Adele",
-    "Beyonce",
-    "Drake",
-    "Kanye West",
-    "Billie Eilish",
-  ];
-
-  // Liste des artistes filtrés
-  List<String> filteredArtists = [];
-
-  @override
-  void initState() {
-    super.initState();
-    filteredArtists = artists;
-  }
+  List<Artist> _displayedArtists = artists;
 
   void _filterArtists(String query) {
+    final filteredArtists = artists.where((artist) {
+      final artistLower = artist.name.toLowerCase();
+      final queryLower = query.toLowerCase();
+
+      return artistLower.contains(queryLower);
+    }).toList();
+
     setState(() {
-      filteredArtists = artists
-          .where((artist) =>
-              artist.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      _displayedArtists = filteredArtists;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF202020),
+      appBar: AppBar(
+        title: Text('Artists'),
+      ),
       body: Column(
         children: [
-          SearchInput(
-            controller: _searchController,
-            onChanged: (query) {
-              _filterArtists(query);
-            },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Search artists...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onChanged: _filterArtists,
+            ),
           ),
-          // Ajoutez la liste des artistes ici
           Expanded(
             child: ListView.builder(
-              itemCount: filteredArtists.length,
+              itemCount: _displayedArtists.length,
               itemBuilder: (context, index) {
+                final artist = _displayedArtists[index];
                 return ArtistCard(
-                  artistName: filteredArtists[index],
+                  artistName: artist.name,
+                  imageUrl: artist.imageName,
+                  genres: artist.genre,
                   onTap: () {
-                    // Gérer la sélection de l'artiste
-                    print('Selected artist: ${filteredArtists[index]}');
+                    
                   },
                 );
               },
