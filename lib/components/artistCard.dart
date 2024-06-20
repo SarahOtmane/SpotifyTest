@@ -16,8 +16,9 @@ class ArtistCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(16), // Ajout de la marge ici
       decoration: BoxDecoration(
-        color: Colors.black87,
+        color: Color(0xFF606060),
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.all(8),
@@ -42,7 +43,7 @@ class ArtistCard extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 5),
                     child: Chip(
                       label: Text(genre),
-                      backgroundColor: Colors.purple,
+                      backgroundColor: Color(0xFFB503D2),
                       labelStyle: TextStyle(color: Colors.white),
                     ),
                   )).toList(),
