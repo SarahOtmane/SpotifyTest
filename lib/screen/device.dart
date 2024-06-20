@@ -1,7 +1,11 @@
 // screen/device.dart
 import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'home.dart';
+import 'like.dart';
+import 'concerts.dart';
 
 class DeviceScreen extends StatefulWidget {
   @override
@@ -13,6 +17,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   final List<Widget> _screenList = [
     const HomeScreen(),
     const LikeScreen(),
+    const ConcertsScreen(),
   ];
 
   @override
@@ -28,7 +33,8 @@ class _DeviceScreenState extends State<DeviceScreen> {
           onTap: onTabTapped,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.heart_broken_outlined), label: 'Like'),
+            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
+            BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts'),
           ]),
     );
   }
