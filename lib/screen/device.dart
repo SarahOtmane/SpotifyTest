@@ -26,6 +26,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
           onTap: onTabTapped,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.heart_broken_outlined), label: 'Like'),
           ]),
     );
   }
