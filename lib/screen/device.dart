@@ -32,7 +32,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
           currentIndex: _currentScreen,
           onTap: onTabTapped,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
             BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts'),
           ]),
