@@ -14,12 +14,12 @@ class Artist {
 
 List<Artist> artists = [
   Artist(
-    imageName: '',
+    imageName: 'url',
     name: 'TaylorSwift',
     genre: ['rock', 'pop'],
   ),
   Artist(
-    imageName: '',
+    imageName: 'url',
     name: 'Ed Sheeran',
     genre: ['jaz', 'pop'],
   ),
