@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/artistCard.dart';
 import '../data/artistData.dart';
+import '../components/searchBar.dart'; 
 
 class ListArtistScreen extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class ListArtistScreen extends StatefulWidget {
 }
 
 class _ListArtistScreenState extends State<ListArtistScreen> {
+  TextEditingController _searchController = TextEditingController();
   List<Artist> _displayedArtists = artists;
 
   void _filterArtists(String query) {
@@ -26,23 +28,12 @@ class _ListArtistScreenState extends State<ListArtistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Artists'),
-      ),
+      backgroundColor: Color(0xFF202020),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search artists...',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onChanged: _filterArtists,
-            ),
+          SearchInput( 
+            controller: _searchController,
+            onChanged: _filterArtists,
           ),
           Expanded(
             child: ListView.builder(
@@ -54,7 +45,7 @@ class _ListArtistScreenState extends State<ListArtistScreen> {
                   imageUrl: artist.imageName,
                   genres: artist.genre,
                   onTap: () {
-                    
+                    // Gérer la sélection de l'artiste
                   },
                 );
               },
