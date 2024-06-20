@@ -25,9 +25,10 @@ class _DeviceScreenState extends State<DeviceScreen> {
     return Scaffold(
       body: _screenList[_currentScreen],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFF202020),
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Color(0xFFB503D2), 
-        unselectedItemColor: Colors.black,
+        unselectedItemColor: Colors.white,
         iconSize: 35,
         currentIndex: _currentScreen,
         onTap: onTabTapped,
