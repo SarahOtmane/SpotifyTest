@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/concertArtistData.dart';
 import '../components/artistConcertCard.dart';
+import '../components/color.dart';
 
 class ConcertsScreen extends StatelessWidget {
   ConcertsScreen({super.key});
@@ -10,6 +11,7 @@ class ConcertsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.black,
       body: SingleChildScrollView(
         child: ListView.builder(
           shrinkWrap: true, // Ajouté pour rendre la ListView flexible dans le ScrollView
