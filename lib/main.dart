@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
-import 'screen/device.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:spotify/screen/home.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Pour enlever la barre de debug
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: DeviceScreen(),
-        ),
-      ),
+      home: const HomeScreen(), // Utilisez HomeScreen ici
     );
   }
 }
