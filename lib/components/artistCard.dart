@@ -25,6 +25,7 @@ class ArtistCard extends StatelessWidget {
       padding: EdgeInsets.all(8),
       child: Row(
         children: [
+          SizedBox(width: 10),
           CircleAvatar(
             backgroundImage: NetworkImage(imageUrl),
             radius: 30,
@@ -53,6 +54,7 @@ class ArtistCard extends StatelessWidget {
             ),
           ),
           Icon(Icons.arrow_forward, color: AppColors.white),
+          SizedBox(width: 10),
         ],
       ),
     );
