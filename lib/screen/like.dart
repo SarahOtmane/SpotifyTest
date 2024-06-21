@@ -20,38 +20,98 @@ class LikeScreen extends StatelessWidget {
         ),
         centerTitle: false,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ArtistImageCard(
+                  artistName: "Taylor Swift",
+                  imagePath: "assets/images/taylorSwift.jpg",
+                  onTap: () {
+                    // Gérer la sélection de l'artiste
+                  },
+                ),
+                ArtistImageCard(
+                  artistName: "Ed Sheeran",
+                  imagePath: "assets/images/taylorSwift.jpg",
+                  onTap: () {
+                    // Gérer la sélection de l'artiste
+                  },
+                ),
+                ArtistImageCard(
+                  artistName: "Ariana Grande",
+                  imagePath: "assets/images/taylorSwift.jpg",
+                  onTap: () {
+                    // Gérer la sélection de l'artiste
+                  },
+                ),
+                ArtistImageCard(
+                  artistName: "Drake",
+                  imagePath: "assets/images/taylorSwift.jpg",
+                  onTap: () {
+                    // Gérer la sélection de l'artiste
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 45),
+          const Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              "Leurs futurs concerts",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Expanded(
+            // Utilisation d'Expanded pour que cette partie occupe tout l'espace restant
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  ArtistImageCard(
+                  ArtistCard(
                     artistName: "Taylor Swift",
-                    imagePath: "assets/images/taylorSwift.jpg",
+                    imageUrl: "assets/images/taylorSwift.jpg",
+                    genres: const ["Pop", "Country"],
                     onTap: () {
                       // Gérer la sélection de l'artiste
                     },
                   ),
-                  ArtistImageCard(
+                  ArtistCard(
                     artistName: "Ed Sheeran",
-                    imagePath: "assets/images/taylorSwift.jpg",
+                    imageUrl: "assets/images/taylorSwift.jpg",
+                    genres: const ["Pop", "Folk"],
                     onTap: () {
                       // Gérer la sélection de l'artiste
                     },
                   ),
-                  ArtistImageCard(
+                  ArtistCard(
                     artistName: "Ariana Grande",
-                    imagePath: "assets/images/taylorSwift.jpg",
+                    imageUrl: "assets/images/taylorSwift.jpg",
+                    genres: const ["Pop", "R&B"],
                     onTap: () {
                       // Gérer la sélection de l'artiste
                     },
                   ),
-                  ArtistImageCard(
+                  ArtistCard(
                     artistName: "Drake",
-                    imagePath: "assets/images/taylorSwift.jpg",
+                    imageUrl: "assets/images/taylorSwift.jpg",
+                    genres: const ["Hip Hop", "Rap"],
+                    onTap: () {
+                      // Gérer la sélection de l'artiste
+                    },
+                  ),
+                  ArtistCard(
+                    artistName: "Beyoncé",
+                    imageUrl: "assets/images/taylorSwift.jpg",
+                    genres: const ["R&B", "Pop"],
                     onTap: () {
                       // Gérer la sélection de l'artiste
                     },
@@ -59,65 +119,8 @@ class LikeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 45),
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Text(
-                "Leurs futurs concerts",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.white,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
-            Column(
-              children: [
-                ArtistCard(
-                  artistName: "Taylor Swift",
-                  imageUrl: "assets/images/taylorSwift.jpg",
-                  genres: const ["Pop", "Country"],
-                  onTap: () {
-                    // Gérer la sélection de l'artiste
-                  },
-                ),
-                ArtistCard(
-                  artistName: "Ed Sheeran",
-                  imageUrl: "assets/images/taylorSwift.jpg",
-                  genres: const ["Pop", "Folk"],
-                  onTap: () {
-                    // Gérer la sélection de l'artiste
-                  },
-                ),
-                ArtistCard(
-                  artistName: "Ariana Grande",
-                  imageUrl: "assets/images/taylorSwift.jpg",
-                  genres: const ["Pop", "R&B"],
-                  onTap: () {
-                    // Gérer la sélection de l'artiste
-                  },
-                ),
-                ArtistCard(
-                  artistName: "Drake",
-                  imageUrl: "assets/images/taylorSwift.jpg",
-                  genres: const ["Hip Hop", "Rap"],
-                  onTap: () {
-                    // Gérer la sélection de l'artiste
-                  },
-                ),
-                ArtistCard(
-                  artistName: "Beyoncé",
-                  imageUrl: "assets/images/taylorSwift.jpg",
-                  genres: const ["R&B", "Pop"],
-                  onTap: () {
-                    // Gérer la sélection de l'artiste
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
