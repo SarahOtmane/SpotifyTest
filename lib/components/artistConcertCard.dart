@@ -8,6 +8,7 @@ class ArtistConcertCard extends StatelessWidget {
   final String lien;
   final List<String> genres;
   final VoidCallback onTap;
+  final bool showGenres;
 
   ArtistConcertCard({
     required this.concertName,
@@ -16,6 +17,7 @@ class ArtistConcertCard extends StatelessWidget {
     required this.lieux,
     required this.lien,
     required this.onTap,
+    this.showGenres = true,
   });
 
   @override
@@ -62,16 +64,17 @@ class ArtistConcertCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: genres.map((genre) => Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Chip(
-                    label: Text(genre),
-                    backgroundColor: AppColors.primarylight,
-                    labelStyle: TextStyle(color: Colors.white),
-                  ),
-                )).toList(),
-              ),
+              if (showGenres) // Afficher les genres seulement si showGenres est true
+                Row(
+                  children: genres.map((genre) => Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Chip(
+                      label: Text(genre),
+                      backgroundColor: AppColors.primarylight,
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                  )).toList(),
+                ),
               GestureDetector(
                 onTap: onTap,
                 child: Row(
