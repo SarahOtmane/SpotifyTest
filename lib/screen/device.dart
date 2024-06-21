@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:spotify/screen/listArtist.dart';
 
 import 'home.dart';
 import 'concerts.dart';
@@ -15,10 +14,9 @@ class DeviceScreen extends StatefulWidget {
 class _DeviceScreenState extends State<DeviceScreen> {
   int _currentScreen = 0;
   final List<Widget> _screenList = [
-    const HomeScreen(),
+    HomeScreen(),
     const LikeScreen(),
-    const ConcertsScreen(),
-    ListArtistScreen(),
+    ConcertsScreen(),
   ];
 
   @override
@@ -38,8 +36,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
         items: const [
           BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
           BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
-          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts'),
-          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.list), label: 'lists'),
+          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts')
         ],
       ),
     );
