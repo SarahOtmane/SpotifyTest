@@ -21,7 +21,7 @@ class ArtistConcertCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 2.0),
       decoration: BoxDecoration(
         color: AppColors.grey,
         borderRadius: BorderRadius.circular(10),
@@ -37,7 +37,7 @@ class ArtistConcertCard extends StatelessWidget {
                 concertName,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -45,7 +45,7 @@ class ArtistConcertCard extends StatelessWidget {
                 date,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -55,24 +55,23 @@ class ArtistConcertCard extends StatelessWidget {
             lieux,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 15,
             ),
           ),
           SizedBox(height: 16),
           Row(
-            children: genres.map((genre) => Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Chip(
-                label: Text(genre),
-                backgroundColor: AppColors.primarylight,
-                labelStyle: TextStyle(color: Colors.white),
-              ),
-            )).toList(),
-          ),
-          SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Row(
+                children: genres.map((genre) => Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Chip(
+                    label: Text(genre),
+                    backgroundColor: AppColors.primarylight,
+                    labelStyle: TextStyle(color: Colors.white),
+                  ),
+                )).toList(),
+              ),
               GestureDetector(
                 onTap: onTap,
                 child: Row(
@@ -81,10 +80,10 @@ class ArtistConcertCard extends StatelessWidget {
                       'Acheter mes billets',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: 6),
                     Icon(
                       Icons.open_in_new,
                       color: Colors.white,

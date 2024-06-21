@@ -17,7 +17,7 @@ class ArtistCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16), // Ajout de la marge ici
+      margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 2.0), 
       decoration: BoxDecoration(
         color: AppColors.grey,
         borderRadius: BorderRadius.circular(10),
