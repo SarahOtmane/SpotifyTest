@@ -7,4 +7,5 @@ class AppColors {
   static const Color darkGrey = Color(0xFF373737);
   static const Color white = Colors.white;
   static const Color black = Colors.black;
+  static const Color primarylight = Color.fromRGBO(181, 3, 210, 0.5);
 }
