@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/color.dart';
+import 'package:spotify/components/Genre.dart';
 
 class ArtistCard extends StatelessWidget {
   final String artistName;
@@ -21,48 +22,43 @@ class ArtistCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 2.0),
+        margin: const EdgeInsets.only(
+            top: 10.0, left: 20.0, right: 20.0, bottom: 2.0),
         decoration: BoxDecoration(
           color: AppColors.grey,
           borderRadius: BorderRadius.circular(10),
         ),
-        padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0, bottom: 20.0),
+        padding: const EdgeInsets.only(
+            top: 20.0, left: 10.0, right: 10.0, bottom: 20.0),
         child: Row(
           children: [
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             CircleAvatar(
-              backgroundImage: NetworkImage(imageUrl),
-              radius: 30,
+              backgroundImage: AssetImage(
+                  imageUrl), // Utilisation de AssetImage pour charger l'image depuis assets
+              radius: 30, // Rayon du cercle
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     artistName,
-                    style: TextStyle(color: AppColors.white, fontSize: 18),
+                    style:
+                        const TextStyle(color: AppColors.white, fontSize: 18),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Wrap(
-                    spacing: 5.0, 
-                    runSpacing: 5.0, 
-                    children: genres.map((genre) => Chip(
-                      avatar: Icon(
-                        Icons.circle,
-                        color: Colors.white,
-                        size: 10,
-                      ),
-                      label: Text(capitalize(genre)),
-                      backgroundColor: AppColors.primary,
-                      labelStyle: TextStyle(color: Colors.white),
-                    )).toList(),
+                    spacing: 5.0,
+                    runSpacing: 5.0,
+                    children: genres.map((genre) => const Genre()).toList(),
                   )
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward, color: AppColors.white),
-            SizedBox(width: 10),
+            const Icon(Icons.arrow_forward, color: AppColors.white),
+            const SizedBox(width: 10),
           ],
         ),
       ),

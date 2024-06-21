@@ -15,7 +15,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   int _currentScreen = 0;
   final List<Widget> _screenList = [
     HomeScreen(),
-    const LikeScreen(),
+    LikeScreen(),
     ConcertsScreen(),
   ];
 
@@ -26,17 +26,20 @@ class _DeviceScreenState extends State<DeviceScreen> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.black,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.primary, 
+        selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.white,
         iconSize: 35,
         currentIndex: _currentScreen,
         onTap: onTabTapped,
-        showSelectedLabels: false, 
-        showUnselectedLabels: false, 
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: const [
-          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
-          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
-          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts')
+          BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
+          BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.music), label: 'Concerts')
         ],
       ),
     );

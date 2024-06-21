@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/components/Genre.dart';
 import '../components/color.dart';
 
 class ArtistConcertCard extends StatelessWidget {
@@ -10,7 +11,8 @@ class ArtistConcertCard extends StatelessWidget {
   final VoidCallback onTap;
   final bool showGenres;
 
-  ArtistConcertCard({
+  const ArtistConcertCard({
+    super.key,
     required this.concertName,
     required this.genres,
     required this.date,
@@ -25,12 +27,13 @@ class ArtistConcertCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 2.0),
+      margin: const EdgeInsets.only(
+          top: 10.0, left: 20.0, right: 20.0, bottom: 2.0),
       decoration: BoxDecoration(
         color: AppColors.grey,
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,7 +42,7 @@ class ArtistConcertCard extends StatelessWidget {
             children: [
               Text(
                 concertName,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -47,22 +50,22 @@ class ArtistConcertCard extends StatelessWidget {
               ),
               Text(
                 date,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             lieux,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 14,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -70,26 +73,19 @@ class ArtistConcertCard extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: genres.map((genre) => Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: Chip(
-                        avatar: Icon(
-                          Icons.circle,
-                          color: Colors.white,
-                          size: 10,
-                        ),
-                        label: Text(capitalize(genre)),
-                        backgroundColor: AppColors.primary,
-                        labelStyle: TextStyle(color: Colors.white),
-                      ),
-                    )).toList(),
+                    children: genres
+                        .map((genre) => const Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Genre(),
+                            ))
+                        .toList(),
                   ),
                 )
               else
-                Spacer(),
+                const Spacer(),
               GestureDetector(
                 onTap: onTap,
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(

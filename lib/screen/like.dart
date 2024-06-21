@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/components/artistCard.dart';
+import 'package:spotify/components/artistConcertCard.dart';
 import 'package:spotify/components/artistImageCard.dart';
 import '../components/color.dart';
 
-class LikeScreen extends StatelessWidget {
-  const LikeScreen({Key? key});
+import '../data/concertArtistData.dart';
 
+class LikeScreen extends StatelessWidget {
+  LikeScreen({Key? key});
+
+  final List<Concert> _displayedConcerts = concerts;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +61,7 @@ class LikeScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 45),
+          const SizedBox(height: 25),
           const Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
@@ -72,54 +75,30 @@ class LikeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            // Utilisation d'Expanded pour que cette partie occupe tout l'espace restant
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ArtistCard(
-                    artistName: "Taylor Swift",
-                    imageUrl: "assets/images/taylorSwift.jpg",
-                    genres: const ["Pop", "Country"],
+              child: ListView.builder(
+                shrinkWrap:
+                    true, // Ajouté pour rendre la ListView flexible dans le ScrollView
+                physics:
+                    const NeverScrollableScrollPhysics(), // Pour désactiver le défilement de la ListView
+                itemCount: _displayedConcerts.length,
+                itemBuilder: (context, index) {
+                  final concert = _displayedConcerts[index];
+                  return ArtistConcertCard(
+                    concertName: concert.name,
+                    genres: concert.genre,
+                    date: concert.date,
+                    lieux: concert.lieux,
+                    lien: concert.lien,
                     onTap: () {
                       // Gérer la sélection de l'artiste
                     },
-                  ),
-                  ArtistCard(
-                    artistName: "Ed Sheeran",
-                    imageUrl: "assets/images/taylorSwift.jpg",
-                    genres: const ["Pop", "Folk"],
-                    onTap: () {
-                      // Gérer la sélection de l'artiste
-                    },
-                  ),
-                  ArtistCard(
-                    artistName: "Ariana Grande",
-                    imageUrl: "assets/images/taylorSwift.jpg",
-                    genres: const ["Pop", "R&B"],
-                    onTap: () {
-                      // Gérer la sélection de l'artiste
-                    },
-                  ),
-                  ArtistCard(
-                    artistName: "Drake",
-                    imageUrl: "assets/images/taylorSwift.jpg",
-                    genres: const ["Hip Hop", "Rap"],
-                    onTap: () {
-                      // Gérer la sélection de l'artiste
-                    },
-                  ),
-                  ArtistCard(
-                    artistName: "Beyoncé",
-                    imageUrl: "assets/images/taylorSwift.jpg",
-                    genres: const ["R&B", "Pop"],
-                    onTap: () {
-                      // Gérer la sélection de l'artiste
-                    },
-                  ),
-                ],
+                  );
+                },
               ),
             ),
-          ),
+            // Utilisation d'Expanded pour que cette partie occupe tout l'espace restant
+          )
         ],
       ),
     );

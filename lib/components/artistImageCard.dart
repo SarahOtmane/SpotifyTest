@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/color.dart'; // Assurez-vous d'importer vos couleurs depuis votre fichier color.dart
+import 'package:spotify/components/color.dart';
 
 class ArtistImageCard extends StatelessWidget {
   final String artistName;
@@ -43,7 +43,7 @@ class ArtistImageCard extends StatelessWidget {
                       bottomRight:
                           Radius.circular(5), // Coin inférieur droit arrondi
                     ),
-                    color: Colors.grey.withOpacity(0.9),
+                    color: AppColors.darkGrey.withOpacity(0.6),
                   ),
                   child: Center(
                     child: Text(
