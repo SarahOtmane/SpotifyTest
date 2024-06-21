@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../components/artistCard.dart';
 import '../data/artistData.dart';
 import '../components/searchBar.dart'; 
+import '../components/color.dart';
 
 class ListArtistScreen extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _ListArtistScreenState extends State<ListArtistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF202020),
+      backgroundColor: AppColors.black,
       body: Column(
         children: [
           SearchInput( 

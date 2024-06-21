@@ -5,6 +5,7 @@ import 'package:spotify/screen/listArtist.dart';
 
 import 'home.dart';
 import 'concerts.dart';
+import '../components/color.dart';
 
 class DeviceScreen extends StatefulWidget {
   @override
@@ -25,10 +26,10 @@ class _DeviceScreenState extends State<DeviceScreen> {
     return Scaffold(
       body: _screenList[_currentScreen],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFF202020),
+        backgroundColor: AppColors.black,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xFFB503D2), 
-        unselectedItemColor: Colors.white,
+        selectedItemColor: AppColors.primary, 
+        unselectedItemColor: AppColors.white,
         iconSize: 35,
         currentIndex: _currentScreen,
         onTap: onTabTapped,
