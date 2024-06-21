@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/color.dart';
 
 class ArtistCard extends StatelessWidget {
   final String artistName;
@@ -18,7 +19,7 @@ class ArtistCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(16), // Ajout de la marge ici
       decoration: BoxDecoration(
-        color: Color(0xFF606060),
+        color: AppColors.grey,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.all(8),
@@ -35,7 +36,7 @@ class ArtistCard extends StatelessWidget {
               children: [
                 Text(
                   artistName,
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(color: AppColors.white, fontSize: 18),
                 ),
                 SizedBox(height: 5),
                 Row(
@@ -43,15 +44,15 @@ class ArtistCard extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 5),
                     child: Chip(
                       label: Text(genre),
-                      backgroundColor: Color(0xFFB503D2),
-                      labelStyle: TextStyle(color: Colors.white),
+                      backgroundColor: AppColors.primarylight,
+                      labelStyle: TextStyle(color: AppColors.white),
                     ),
                   )).toList(),
                 ),
               ],
             ),
           ),
-          Icon(Icons.arrow_forward, color: Colors.white),
+          Icon(Icons.arrow_forward, color: AppColors.white),
         ],
       ),
     );
