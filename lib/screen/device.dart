@@ -17,7 +17,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   final List<Widget> _screenList = [
     const HomeScreen(),
     const LikeScreen(),
-    const ConcertsScreen(),
+    ConcertsScreen(),
     ListArtistScreen(),
   ];
 
