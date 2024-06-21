@@ -20,6 +20,8 @@ class ArtistConcertCard extends StatelessWidget {
     this.showGenres = true,
   });
 
+  String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,7 +78,7 @@ class ArtistConcertCard extends StatelessWidget {
                           color: Colors.white,
                           size: 10,
                         ),
-                        label: Text(genre),
+                        label: Text(capitalize(genre)),
                         backgroundColor: AppColors.primary,
                         labelStyle: TextStyle(color: Colors.white),
                       ),
