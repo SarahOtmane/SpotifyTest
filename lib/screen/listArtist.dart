@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/artistCard.dart';
+import '../components/artistConcertCard.dart';
 import '../data/artistData.dart';
 import '../data/genreData.dart';
 import '../components/searchBar.dart'; 
