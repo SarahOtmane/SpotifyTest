@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
       return artistLower.contains(queryLower);
     }).toList();
-
     setState(() {
       _displayedArtists = filteredArtists;
     });
@@ -77,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
+
       ),
     );
   }
