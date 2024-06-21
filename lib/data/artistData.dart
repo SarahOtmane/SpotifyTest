@@ -1,4 +1,3 @@
-
 class Artist {
   final String imageName;
   final String name;
@@ -13,12 +12,12 @@ class Artist {
 
 List<Artist> artists = [
   Artist(
-    imageName: 'url',
+    imageName: '../../assets/images/taylorSwift.jpg',
     name: 'TaylorSwift',
     genre: ['rock', 'pop'],
   ),
   Artist(
-    imageName: 'url',
+    imageName: '../../assets/images/taylorSwift.jpg',
     name: 'Ed Sheeran',
     genre: ['jaz', 'pop'],
   ),

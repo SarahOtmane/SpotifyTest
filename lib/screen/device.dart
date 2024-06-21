@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:spotify/screen/listArtist.dart';
 import 'package:spotify/screen/detailsArtist.dart';
+
 
 import 'home.dart';
 import 'concerts.dart';
@@ -16,9 +18,10 @@ class DeviceScreen extends StatefulWidget {
 class _DeviceScreenState extends State<DeviceScreen> {
   int _currentScreen = 4;
   final List<Widget> _screenList = [
-    const HomeScreen(),
-    const LikeScreen(),
-    const ConcertsScreen(),
+
+    HomeScreen(),
+    LikeScreen(),
+    ConcertsScreen(),
     ListArtistScreen(),
     DetailsArtistScreen()
   ];

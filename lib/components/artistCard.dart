@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/color.dart';
+import 'package:spotify/components/Genre.dart';
 
 class ArtistCard extends StatelessWidget {
   final String artistName;
@@ -14,46 +15,52 @@ class ArtistCard extends StatelessWidget {
     required this.onTap,
   });
 
+  String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(16), // Ajout de la marge ici
-      decoration: BoxDecoration(
-        color: AppColors.grey,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: EdgeInsets.all(8),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundImage: NetworkImage(imageUrl),
-            radius: 30,
-          ),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  artistName,
-                  style: TextStyle(color: AppColors.white, fontSize: 18),
-                ),
-                SizedBox(height: 5),
-                Row(
-                  children: genres.map((genre) => Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: Chip(
-                      label: Text(genre),
-                      backgroundColor: AppColors.primarylight,
-                      labelStyle: TextStyle(color: AppColors.white),
-                    ),
-                  )).toList(),
-                ),
-              ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(
+            top: 10.0, left: 20.0, right: 20.0, bottom: 2.0),
+        decoration: BoxDecoration(
+          color: AppColors.grey,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: const EdgeInsets.only(
+            top: 20.0, left: 10.0, right: 10.0, bottom: 20.0),
+        child: Row(
+          children: [
+            const SizedBox(width: 10),
+            CircleAvatar(
+              backgroundImage: AssetImage(
+                  imageUrl), // Utilisation de AssetImage pour charger l'image depuis assets
+              radius: 30, // Rayon du cercle
             ),
-          ),
-          Icon(Icons.arrow_forward, color: AppColors.white),
-        ],
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    artistName,
+                    style:
+                        const TextStyle(color: AppColors.white, fontSize: 18),
+                  ),
+                  const SizedBox(height: 5),
+                  Wrap(
+                    spacing: 5.0,
+                    runSpacing: 5.0,
+                    children: genres.map((genre) => const Genre()).toList(),
+                  )
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward, color: AppColors.white),
+            const SizedBox(width: 10),
+          ],
+        ),
       ),
     );
   }

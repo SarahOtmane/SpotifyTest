@@ -1,4 +1,3 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'fetch_api.dart';
 
 // fetch all event with concerns one artist

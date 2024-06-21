@@ -22,4 +22,5 @@ flutter:
   uses-material-design: true
   assets:
     - .env
-    - assets/
+    - assets/images/taylorSwift.jpg
+
