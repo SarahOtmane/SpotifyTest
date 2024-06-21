@@ -57,27 +57,38 @@ class ArtistConcertCard extends StatelessWidget {
             lieux,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 15,
+              fontSize: 14,
             ),
           ),
           SizedBox(height: 16),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              if (showGenres) // Afficher les genres seulement si showGenres est true
-                Row(
-                  children: genres.map((genre) => Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Chip(
-                      label: Text(genre),
-                      backgroundColor: AppColors.primary,
-                      labelStyle: TextStyle(color: Colors.white),
-                    ),
-                  )).toList(),
-                ),
+              if (showGenres)
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: genres.map((genre) => Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Chip(
+                        avatar: Icon(
+                          Icons.circle,
+                          color: Colors.white,
+                          size: 10,
+                        ),
+                        label: Text(genre),
+                        backgroundColor: AppColors.primary,
+                        labelStyle: TextStyle(color: Colors.white),
+                      ),
+                    )).toList(),
+                  ),
+                )
+              else
+                Spacer(),
               GestureDetector(
                 onTap: onTap,
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       'Acheter mes billets',
