@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/artistConcertCard.dart';
 import '../data/concertArtistData.dart';
+import '../components/artistConcertCard.dart';
 
 class ConcertsScreen extends StatelessWidget {
   ConcertsScreen({super.key});
@@ -17,9 +17,12 @@ class ConcertsScreen extends StatelessWidget {
           itemCount: _displayedConcerts.length,
           itemBuilder: (context, index) {
             final concert = _displayedConcerts[index];
-            return artistConcertCard(
-              concertName: concert.name,  // Ajout de l'URL de l'image
-              genres: concert.genre, // Correctement référencé depuis concert
+            return ArtistConcertCard(
+              concertName: concert.name,  
+              genres: concert.genre, 
+              date: concert.date,
+              lieux: concert.lieux,
+              lien: concert.lien,
               onTap: () {
                 // Gérer la sélection de l'artiste
               },
