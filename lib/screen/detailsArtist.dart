@@ -103,7 +103,7 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(20.0),
             child: Text(
               'This is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image.',
               style: TextStyle(color: Colors.white),
