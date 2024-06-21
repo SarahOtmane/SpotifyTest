@@ -1,11 +1,11 @@
-// screen/device.dart
 import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:spotify/screen/listArtist.dart';
 
 import 'home.dart';
-import 'like.dart';
 import 'concerts.dart';
+import '../components/color.dart';
 
 class DeviceScreen extends StatefulWidget {
   @override
@@ -18,24 +18,30 @@ class _DeviceScreenState extends State<DeviceScreen> {
     const HomeScreen(),
     const LikeScreen(),
     const ConcertsScreen(),
+    ListArtistScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
+    return Scaffold(
       body: _screenList[_currentScreen],
       bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.red,
-          unselectedItemColor: Colors.black,
-          iconSize: 35,
-          currentIndex: _currentScreen,
-          onTap: onTabTapped,
-          items: const [
-            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
-            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
-            BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts'),
-          ]),
+        backgroundColor: AppColors.black,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: AppColors.primary, 
+        unselectedItemColor: AppColors.white,
+        iconSize: 35,
+        currentIndex: _currentScreen,
+        onTap: onTabTapped,
+        showSelectedLabels: false, 
+        showUnselectedLabels: false, 
+        items: const [
+          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
+          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
+          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts'),
+          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.list), label: 'lists'),
+        ],
+      ),
     );
   }
 
