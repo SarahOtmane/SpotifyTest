@@ -70,7 +70,7 @@ class ArtistConcertCard extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 8),
                     child: Chip(
                       label: Text(genre),
-                      backgroundColor: AppColors.primarylight,
+                      backgroundColor: AppColors.primary,
                       labelStyle: TextStyle(color: Colors.white),
                     ),
                   )).toList(),

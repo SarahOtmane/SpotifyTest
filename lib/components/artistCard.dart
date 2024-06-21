@@ -45,7 +45,7 @@ class ArtistCard extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 5),
                     child: Chip(
                       label: Text(genre),
-                      backgroundColor: AppColors.primarylight,
+                      backgroundColor: AppColors.primary,
                       labelStyle: TextStyle(color: AppColors.white),
                     ),
                   )).toList(),
