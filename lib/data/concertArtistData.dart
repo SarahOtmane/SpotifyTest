@@ -15,7 +15,7 @@ class Concert {
   });
 }
 
-List<Concert> artists = [
+List<Concert> concerts = [
   Concert(
     date: '24/08/2024',
     name: 'TaylorSwift',
