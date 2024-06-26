@@ -65,6 +65,10 @@ class _ConcertsScreenState extends State<ConcertsScreen> {
       setState(() {
         _displayedConcerts = filteredConcerts;
       });
+    } else {
+      setState(() {
+        _displayedConcerts = _defaultConcerts;
+      });
     }
   }
 
