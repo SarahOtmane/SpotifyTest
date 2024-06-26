@@ -4,13 +4,15 @@ class Artist {
   final List<String> genres;
   final String id;
   final String link;
+  final String description;
 
   Artist(
       {required this.imageName,
       required this.name,
       required this.genres,
       required this.id,
-      required this.link});
+      required this.link,
+      required this.description});
   factory Artist.fromJson(Map<String, dynamic> json) {
     return Artist(
         name: json['name'] as String,
@@ -20,7 +22,8 @@ class Artist {
           json["classifications"][0]["subGenre"]["name"]
         ],
         id: json["id"],
-        link: json["url"]);
+        link: json["url"],
+        description: json["description"]);
   }
 }
 
