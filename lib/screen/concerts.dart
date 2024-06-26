@@ -37,6 +37,7 @@ class _ConcertScreenState extends State<ConcertsScreen>{
           SearchInput(
             controller: _searchController,
             onChanged: _filterConcerts,
+            placeholder: 'Chercher une ville',
           ),
 
           Expanded(
