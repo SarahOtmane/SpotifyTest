@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:spotify/screen/detailsArtist.dart';
-
 import 'home.dart';
 import 'concerts.dart';
 import '../components/color.dart';
@@ -21,7 +19,6 @@ class _DeviceScreenState extends State<DeviceScreen> {
     HomeScreen(),
     LikeScreen(),
     ConcertsScreen(),
-    const DetailsArtistScreen()
   ];
 
   @override
@@ -45,10 +42,6 @@ class _DeviceScreenState extends State<DeviceScreen> {
               icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
           BottomNavigationBarItem(
               icon: FaIcon(FontAwesomeIcons.music), label: 'Concerts'),
-          // BottomNavigationBarItem(
-          //     icon: Icon(FontAwesomeIcons.list), label: 'lists'),
-          BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.car), label: 'car')
         ],
       ),
     );
