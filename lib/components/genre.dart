@@ -16,7 +16,7 @@ class GenreWidget extends StatelessWidget {
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
-          color: genre.isSelected ? AppColors.primary : Colors.grey,
+          color: AppColors.primary,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(child: Text(genre.name)),
