@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:spotify/screen/detailsArtist.dart';
-
 import 'home.dart';
 import 'concerts.dart';
 import '../components/color.dart';

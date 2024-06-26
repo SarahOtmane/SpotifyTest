@@ -4,8 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'screen/device.dart';
 
-void main() async{
-    await dotenv.load(fileName: ".env");
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 
@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       // Pour enlever la barre de debug
       debugShowCheckedModeBanner: false,
       home: Scaffold(
