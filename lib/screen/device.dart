@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+
 import 'home.dart';
 import 'concerts.dart';
 import '../components/color.dart';
@@ -30,18 +31,17 @@ class _DeviceScreenState extends State<DeviceScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.white,
-        iconSize: 35,
         currentIndex: _currentScreen,
         onTap: onTabTapped,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const [
           BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
+              icon: FaIcon(FontAwesomeIcons.house, size: 25.0,), label: 'Home'),
           BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
+              icon: FaIcon(Icons.favorite, size: 30.0), label: 'Artists likés'),
           BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.music), label: 'Concerts'),
+              icon: FaIcon(FontAwesomeIcons.music, size: 25.0,), label: 'Concerts'),
         ],
       ),
     );
