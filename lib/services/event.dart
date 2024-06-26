@@ -19,15 +19,20 @@ Future<dynamic> fetchEvent({String? params}) async {
 // fetch event based on city
 Future<dynamic> fetchEventLocation({String? params}) async {
   ApiService apiService = ApiService();
-  if (params != null) {
-    try {
-      var response = await apiService
-          .get("/events", params: {"city": params, "locale": "fr-fr"});
-      return response;
-    } catch (e) {
-      throw Exception('Failed to fetch data: $e');
-    }
-  } else {
-    throw Exception('Entrez un nom');
+  // if (params != null) {
+  try {
+    var response = await apiService.get("/events", params: {
+      // TODO à changer
+      "locale": "fr-fr",
+      "classificationId": "KZFzniwnSyZfZ7v7nJ",
+      "size": 10,
+      "countryCode": "FR"
+    });
+    return response["_embedded"]["events"];
+  } catch (e) {
+    throw Exception('Failed to fetch data: $e');
   }
+  // } else {
+  //   throw Exception('Entrez une ville');
+  // }
 }

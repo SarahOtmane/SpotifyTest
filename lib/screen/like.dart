@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/components/artistConcertCard.dart';
+import 'package:spotify/components/concertCard.dart';
 import 'package:spotify/components/artistImageCard.dart';
 import '../components/color.dart';
 
-import '../data/concertArtistData.dart';
+import '../data/concertData.dart';
 
 class LikeScreen extends StatelessWidget {
   LikeScreen({Key? key});
 
-  final List<Concert> _displayedConcerts = concerts;
+  final List<Concert> _displayedConcerts = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,13 +85,15 @@ class LikeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final concert = _displayedConcerts[index];
                   return ArtistConcertCard(
-                    concertName: concert.name,
-                    genres: concert.genre,
+                    artistName: concert.nameArtist,
                     date: concert.date,
-                    lieux: concert.lieux,
-                    lien: concert.lien,
+                    location: concert.city,
+                    link: concert.link,
+                    genres: concert.genres,
+                    showGenres: true,
+                    city: concert.city,
                     onTap: () {
-                      // Gérer la sélection de l'artiste
+                      // Handle artist selection
                     },
                   );
                 },

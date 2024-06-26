@@ -1,87 +1,106 @@
-import 'package:flutter/material.dart';
-import '../components/artistConcertCard.dart';
-import '../components/color.dart';
-import '../components/searchBar.dart';
-import '../data/concertArtistData.dart';
+import 'package:flutter/material.dart'; // Assurez-vous d'importer Concert ici
+import 'package:spotify/components/concertCard.dart';
+import 'package:spotify/components/searchBar.dart';
+import 'package:spotify/data/artistData.dart';
+import 'package:spotify/data/concertData.dart';
+import 'package:spotify/services/artist.dart'; // Assurez-vous d'importer Artist ici
+import 'package:spotify/services/event.dart'; // Assurez-vous d'importer fetchEventLocation ici
+import 'package:url_launcher/url_launcher.dart'; // Importez le package url_launcher
 
 class ConcertsScreen extends StatefulWidget {
   @override
-  _ConcertScreenState createState() => _ConcertScreenState();
+  _ConcertsScreenState createState() => _ConcertsScreenState();
 }
 
-class _ConcertScreenState extends State<ConcertsScreen> {
-  TextEditingController _searchController = TextEditingController();
+class _ConcertsScreenState extends State<ConcertsScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  List<Concert> _defaultConcerts = [];
   List<Concert> _displayedConcerts = [];
-  bool _isDefaultCity = true;
 
   @override
   void initState() {
     super.initState();
-    _displayConcertsForDefaultCity();
+    _fetchConcert();
   }
 
-  void _displayConcertsForDefaultCity() {
-    final filteredConcerts = concerts.where((concert) {
-      return concert.lieux.toLowerCase().contains('paris');
-    }).toList();
-    setState(() {
-      _displayedConcerts = filteredConcerts;
-      _isDefaultCity = true;
-    });
+  Future<void> _fetchConcert() async {
+    try {
+      final response = await fetchEventLocation();
+      List<Concert> concerts = [];
+
+      // Parcourir chaque élément de la liste response
+      for (var event in response) {
+        Artist? artist;
+
+        // Vérifier si les attractions sont disponibles
+        if (event["_embedded"]["attractions"] != null) {
+          final defaultArtist = await fetchArtistDetail(
+            params: event["_embedded"]["attractions"][0]["id"],
+          );
+          artist = Artist.fromJson(defaultArtist);
+        }
+
+        // Ajouter un concert à la liste concerts en utilisant Concert.fromJson
+        concerts.add(Concert.fromJson(event, artist));
+      }
+
+      setState(() {
+        _defaultConcerts = concerts;
+        _displayedConcerts = _defaultConcerts;
+      });
+    } catch (e) {
+      setState(() {});
+      print('Failed to fetch concerts: $e');
+    }
   }
 
   void _filterConcerts(String query) {
     if (query.isNotEmpty) {
-      final filteredConcerts = concerts.where((concert) {
-        final concertLower = concert.lieux.toLowerCase();
+      final filteredConcerts = _defaultConcerts.where((concert) {
+        final concertLower = concert.city.toLowerCase();
         final queryLower = query.toLowerCase();
 
         return concertLower.contains(queryLower);
       }).toList();
       setState(() {
         _displayedConcerts = filteredConcerts;
-        _isDefaultCity = false;  
       });
-    } else {
-      _displayConcertsForDefaultCity();  
+    }
+  }
+
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: Colors.black,
       body: Column(
         children: [
+          // Votre barre de recherche
           SearchInput(
             controller: _searchController,
             onChanged: _filterConcerts,
             placeholder: 'Chercher une ville',
           ),
-          if (_isDefaultCity) 
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Ville par défaut : Paris',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
+
           Expanded(
             child: ListView.builder(
               itemCount: _displayedConcerts.length,
               itemBuilder: (context, index) {
                 final concert = _displayedConcerts[index];
                 return ArtistConcertCard(
-                  concertName: concert.name,
-                  genres: concert.genre,
+                  link: concert.link,
+                  location: concert.location,
+                  artistName: concert.nameArtist,
                   date: concert.date,
-                  lieux: concert.lieux,
-                  lien: concert.lien,
+                  genres: concert.genres,
+                  city: concert.city,
                   onTap: () {
-                    // Handle artist selection
+                    _launchUrl(Uri.parse(concert.link));
                   },
                 );
               },
