@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../services/artist.dart';
-
 import '../data/artistData.dart';
 import '../data/genreData.dart';
-
 import '../components/searchBar.dart';
 import '../components/color.dart';
 import '../components/artistCard.dart';
-
 import './detailsArtist.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
-
   List<Artist> _defaultArtistes = [];
   List<Artist> _displayedArtists = [];
 
@@ -48,11 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
     final filteredArtists = _defaultArtistes.where((artist) {
       final artistLower = artist.name.toLowerCase();
       final queryLower = query.toLowerCase();
-
       return artistLower.contains(queryLower);
     }).toList();
     setState(() {
       _displayedArtists = filteredArtists;
+    });
+  }
+
+  void _toggleGenreSelection(Genre genre) {
+    setState(() {
+      genre.isSelected = !genre.isSelected;
     });
   }
 
@@ -75,10 +76,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: genres
                     .map((genre) => Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Chip(
-                            label: Text(genre.name),
-                            backgroundColor: AppColors.black,
-                            labelStyle: const TextStyle(color: AppColors.white),
+                          child: GestureDetector(
+                            onTap: () {
+                              _toggleGenreSelection(genre);
+                            },
+                            child: Container(
+                              child: Text(
+                                genre.name,
+                                style: TextStyle(
+                                  color:  AppColors.white,
+                                ),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                              decoration: BoxDecoration(
+                                   border: Border.all(
+          color: genre.isSelected ? AppColors.primary : AppColors.lightgrey,
+        width: 1.0, // Optional: Set the width of the border
+        ),
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    color: genre.isSelected
+                                  ? AppColors.primary
+                                  : AppColors.black,
+                              ),
+                          
+                            ),
                           ),
                         ))
                     .toList(),
