@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/color.dart';
 import '../data/concertArtistData.dart';
 import '../data/artistData.dart';
@@ -15,6 +16,29 @@ class DetailsArtistScreen extends StatefulWidget {
 
 class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
   final List<Concert> _displayedConcerts = concerts; 
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavoriteStatus();
+  }
+
+  _loadFavoriteStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isFavorite = prefs.getBool('isFavorite_${widget.artist.id}') ?? false;
+    });
+
+  }
+
+  _toggleFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+    prefs.setBool('isFavorite_${widget.artist.id}', isFavorite);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +47,7 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
       body: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.4,
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -38,23 +62,50 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
             child: Stack(
               children: [
                 Positioned(
-                  top: 20,
+                  top: 50,
                   left: 25,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.25),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 8.0),
-                    child: Text(
-                      widget.artist.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                  right: 25,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4.0, horizontal: 8.0),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back, 
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            Text(
+                              widget.artist.name,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                          size: 40,
+                          color: isFavorite ?  AppColors.primary : Colors.white,
+                        ),
+                        onPressed: _toggleFavorite,
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(
@@ -97,20 +148,6 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
               textAlign: TextAlign.start,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Concert à venir',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: _displayedConcerts.length,
@@ -123,7 +160,7 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
                   lieux: concert.lieux,
                   lien: concert.lien,
                   onTap: () {
-                    // Gérer la sélection de l'artiste
+                    // Gérer la sélection du concert
                   },
                 );
               },
