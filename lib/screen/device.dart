@@ -21,7 +21,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
     HomeScreen(),
     LikeScreen(),
     ConcertsScreen(),
-    // DetailsArtistScreen()
+    const DetailsArtistScreen()
   ];
 
   @override
@@ -47,8 +47,8 @@ class _DeviceScreenState extends State<DeviceScreen> {
               icon: FaIcon(FontAwesomeIcons.music), label: 'Concerts'),
           // BottomNavigationBarItem(
           //     icon: Icon(FontAwesomeIcons.list), label: 'lists'),
-          // BottomNavigationBarItem(
-          //     icon: Icon(FontAwesomeIcons.car), label: 'car')
+          BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.car), label: 'car')
         ],
       ),
     );

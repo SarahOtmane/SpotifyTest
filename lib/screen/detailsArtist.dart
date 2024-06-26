@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/color.dart';
+import '../data/concertArtistData.dart';
+import '../components/artistConcertCard.dart';
 
 class DetailsArtistScreen extends StatefulWidget {
   const DetailsArtistScreen({super.key});
@@ -9,6 +11,8 @@ class DetailsArtistScreen extends StatefulWidget {
 }
 
 class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
+  final List<Concert> _displayedConcerts = concerts;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +112,39 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
               'This is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image.',
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.start,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Concert à venir',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          // Expanded pour que seuls les éléments de concert défilent
+          Expanded(
+            child: ListView.builder(
+              itemCount: _displayedConcerts.length,
+              itemBuilder: (context, index) {
+                final concert = _displayedConcerts[index];
+                return ArtistConcertCard(
+                  concertName: concert.name,
+                  genres: concert.genre,
+                  date: concert.date,
+                  lieux: concert.lieux,
+                  lien: concert.lien,
+                  onTap: () {
+                    // Gérer la sélection de l'artiste
+                  },
+                );
+              },
             ),
           ),
         ],
