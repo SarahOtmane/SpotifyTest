@@ -92,7 +92,7 @@ class _ConcertsScreenState extends State<ConcertsScreen> {
               itemCount: _displayedConcerts.length,
               itemBuilder: (context, index) {
                 final concert = _displayedConcerts[index];
-                return ArtistConcertCard(
+                return concertCard(
                   link: concert.link,
                   location: concert.location,
                   artistName: concert.nameArtist,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify/components/Genre.dart';
 import '../components/color.dart';
 
-class ArtistConcertCard extends StatelessWidget {
+class concertCard extends StatelessWidget {
   final String date;
   final String artistName;
   final String location;
@@ -12,7 +12,7 @@ class ArtistConcertCard extends StatelessWidget {
   final VoidCallback onTap;
   final bool showGenres;
 
-  const ArtistConcertCard({
+  const concertCard({
     super.key,
     required this.artistName,
     required this.genres,

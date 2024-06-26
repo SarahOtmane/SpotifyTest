@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/components/concertCard.dart';
 import 'package:spotify/components/artistImageCard.dart';
+import 'package:spotify/components/concertCard.dart';
+import 'package:spotify/data/concertData.dart';
 import '../components/color.dart';
-
-import '../data/concertData.dart';
 
 class LikeScreen extends StatelessWidget {
   LikeScreen({Key? key});
 
-  final List<Concert> _displayedConcerts = [];
+  final List<Concert> _displayedConcerts = concerts;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,28 +31,32 @@ class LikeScreen extends StatelessWidget {
               children: [
                 ArtistImageCard(
                   artistName: "Taylor Swift",
-                  imagePath: "assets/images/taylorSwift.jpg",
+                  imagePath:
+                      "https://i.pinimg.com/originals/5f/03/7b/5f037bf6707640ed2dd3babd4a268ac3.jpg",
                   onTap: () {
                     // Gérer la sélection de l'artiste
                   },
                 ),
                 ArtistImageCard(
                   artistName: "Ed Sheeran",
-                  imagePath: "assets/images/taylorSwift.jpg",
+                  imagePath:
+                      "https://i.pinimg.com/originals/5f/03/7b/5f037bf6707640ed2dd3babd4a268ac3.jpg",
                   onTap: () {
                     // Gérer la sélection de l'artiste
                   },
                 ),
                 ArtistImageCard(
                   artistName: "Ariana Grande",
-                  imagePath: "assets/images/taylorSwift.jpg",
+                  imagePath:
+                      "https://i.pinimg.com/originals/5f/03/7b/5f037bf6707640ed2dd3babd4a268ac3.jpg",
                   onTap: () {
                     // Gérer la sélection de l'artiste
                   },
                 ),
                 ArtistImageCard(
                   artistName: "Drake",
-                  imagePath: "assets/images/taylorSwift.jpg",
+                  imagePath:
+                      "https://i.pinimg.com/originals/5f/03/7b/5f037bf6707640ed2dd3babd4a268ac3.jpg",
                   onTap: () {
                     // Gérer la sélection de l'artiste
                   },
@@ -84,16 +87,15 @@ class LikeScreen extends StatelessWidget {
                 itemCount: _displayedConcerts.length,
                 itemBuilder: (context, index) {
                   final concert = _displayedConcerts[index];
-                  return ArtistConcertCard(
+                  return concertCard(
+                    link: concert.link,
+                    location: concert.location,
                     artistName: concert.nameArtist,
                     date: concert.date,
-                    location: concert.city,
-                    link: concert.link,
                     genres: concert.genres,
-                    showGenres: true,
                     city: concert.city,
                     onTap: () {
-                      // Handle artist selection
+                      // _launchUrl(Uri.parse(concert.link));
                     },
                   );
                 },

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spotify/components/concertCard.dart';
+import 'package:spotify/data/concertData.dart';
 import '../components/color.dart';
-import '../data/concertArtistData.dart';
 import '../data/artistData.dart';
-import '../components/artistConcertCard.dart';
 
 class DetailsArtistScreen extends StatefulWidget {
   final Artist artist;
@@ -15,7 +15,7 @@ class DetailsArtistScreen extends StatefulWidget {
 }
 
 class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
-  final List<Concert> _displayedConcerts = concerts; 
+  final List<Concert> _displayedConcerts = concerts;
   bool isFavorite = false;
 
   @override
@@ -29,7 +29,6 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
     setState(() {
       isFavorite = prefs.getBool('isFavorite_${widget.artist.id}') ?? false;
     });
-
   }
 
   _toggleFavorite() async {
@@ -51,7 +50,7 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(widget.artist.imageName), 
+                image: NetworkImage(widget.artist.imageName),
                 fit: BoxFit.cover,
               ),
               borderRadius: const BorderRadius.only(
@@ -79,7 +78,7 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
                           children: [
                             IconButton(
                               icon: const Icon(
-                                Icons.arrow_back, 
+                                Icons.arrow_back,
                                 color: Colors.white,
                               ),
                               onPressed: () {
@@ -101,7 +100,7 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
                         icon: Icon(
                           Icons.favorite,
                           size: 40,
-                          color: isFavorite ?  AppColors.primary : Colors.white,
+                          color: isFavorite ? AppColors.primary : Colors.white,
                         ),
                         onPressed: _toggleFavorite,
                       ),
@@ -112,29 +111,33 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
                   bottom: 15,
                   left: 25,
                   child: Row(
-                    children: widget.artist.genres.map((genre) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.purple,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 8.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.circle, color: Colors.white, size: 8),
-                            const SizedBox(width: 8),
-                            Text(genre,
-                                style: const TextStyle(
-                                  color: Colors.white,
+                    children: widget.artist.genres
+                        .map((genre) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.purple,
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                textAlign: TextAlign.center),
-                            const SizedBox(width: 8),
-                          ],
-                        ),
-                      ),
-                    )).toList(),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4.0, horizontal: 8.0),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.circle,
+                                        color: Colors.white, size: 8),
+                                    const SizedBox(width: 8),
+                                    Text(genre,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    const SizedBox(width: 8),
+                                  ],
+                                ),
+                              ),
+                            ))
+                        .toList(),
                   ),
                 ),
               ],
@@ -153,12 +156,13 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
               itemCount: _displayedConcerts.length,
               itemBuilder: (context, index) {
                 final concert = _displayedConcerts[index];
-                return ArtistConcertCard(
-                  concertName: concert.name,
-                  genres: concert.genre,
+                return concertCard(
+                  artistName: concert.nameArtist,
+                  genres: concert.genres,
                   date: concert.date,
-                  lieux: concert.lieux,
-                  lien: concert.lien,
+                  location: concert.location,
+                  link: concert.link,
+                  city: concert.city,
                   onTap: () {
                     // Gérer la sélection du concert
                   },

@@ -1,5 +1,4 @@
 import 'package:spotify/data/artistData.dart';
-import 'package:spotify/services/artist.dart'; // Assurez-vous d'importer Artist ici
 
 class Concert {
   final String date;
@@ -31,3 +30,30 @@ class Concert {
         genres: defaultArtist != null ? defaultArtist.genres : ["null"]);
   }
 }
+
+List<Concert> concerts = [
+  Concert(
+      date: '24/08/2024',
+      nameArtist: 'TaylorSwift',
+      link: 'test',
+      location: 'La Maroquinnerie, Paris, 75007',
+      genres: ['rock', 'pop'],
+      city: 'Paris',
+      postalCode: "33700"),
+  Concert(
+      date: '24/08/2024',
+      nameArtist: 'TaylorSwift',
+      link: 'test',
+      location: 'La Maroquinnerie, Paris, 75007',
+      genres: ['rock', 'pop'],
+      city: 'Paris',
+      postalCode: "33700"),
+  Concert(
+      date: '24/08/2024',
+      nameArtist: 'TaylorSwift',
+      link: 'test',
+      location: 'La Maroquinnerie, Paris, 75007',
+      genres: ['rock', 'pop'],
+      city: 'Paris',
+      postalCode: "33700"),
+];
