@@ -60,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchInput(
             controller: _searchController,
             onChanged: _filterArtists,
+            placeholder: 'Chercher un artist',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
