@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import '../components/color.dart';
 import '../data/concertArtistData.dart';
+import '../data/artistData.dart';
 import '../components/artistConcertCard.dart';
 
 class DetailsArtistScreen extends StatefulWidget {
-  const DetailsArtistScreen({super.key});
+  final Artist artist;
+
+  const DetailsArtistScreen({Key? key, required this.artist}) : super(key: key);
 
   @override
   _DetailsArtistScreenState createState() => _DetailsArtistScreenState();
 }
 
 class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
-  final List<Concert> _displayedConcerts = concerts;
+  final List<Concert> _displayedConcerts = concerts; 
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +25,12 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
           Container(
             height: MediaQuery.of(context).size.height * 0.2,
             width: double.infinity,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('../assets/mj.jpg'),
+                image: NetworkImage(widget.artist.imageName), 
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
@@ -44,9 +47,9 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
                     ),
                     padding: const EdgeInsets.symmetric(
                         vertical: 4.0, horizontal: 8.0),
-                    child: const Text(
-                      'Mickael Jackson',
-                      style: TextStyle(
+                    child: Text(
+                      widget.artist.name,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -58,58 +61,38 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
                   bottom: 15,
                   left: 25,
                   child: Row(
-                    children: [
-                      Container(
+                    children: widget.artist.genres.map((genre) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Container(
                         decoration: BoxDecoration(
                           color: Colors.purple,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 8.0),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.circle, color: Colors.white, size: 8),
-                            SizedBox(width: 8),
-                            Text('Pop',
-                                style: TextStyle(
+                            const Icon(Icons.circle, color: Colors.white, size: 8),
+                            const SizedBox(width: 8),
+                            Text(genre,
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                                 textAlign: TextAlign.center),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                           ],
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.purple,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 8.0),
-                        child: const Row(
-                          children: [
-                            Icon(Icons.circle, color: Colors.white, size: 8),
-                            SizedBox(width: 8),
-                            Text('Legend',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center),
-                            SizedBox(width: 8),
-                          ],
-                        ),
-                      ),
-                    ],
+                    )).toList(),
                   ),
                 ),
               ],
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              'This is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image.',
+              widget.artist.description,
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.start,
             ),
@@ -128,7 +111,6 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
               ),
             ),
           ),
-          // Expanded pour que seuls les éléments de concert défilent
           Expanded(
             child: ListView.builder(
               itemCount: _displayedConcerts.length,
