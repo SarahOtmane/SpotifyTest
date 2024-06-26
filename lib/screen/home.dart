@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/services/artist.dart';
-import '../components/artistCard.dart';
+
+import '../services/artist.dart';
+
 import '../data/artistData.dart';
 import '../data/genreData.dart';
+
 import '../components/searchBar.dart';
 import '../components/color.dart';
+import '../components/artistCard.dart';
+
+import './detailsArtist.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -90,7 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   imageUrl: artist.imageName,
                   genres: artist.genres,
                   onTap: () {
-                    // Gérer la sélection de l'artiste
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsArtistScreen(artist: artist),
+                      ),
+                    );
                   },
                 );
               },
