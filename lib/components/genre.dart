@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
-import '../data/genreData.dart';
-import './color.dart';
 
-class GenreWidget extends StatelessWidget {
-  final Genre genre;
-  final VoidCallback onTap;
-
-  GenreWidget({required this.genre, required this.onTap});
+class Genre extends StatelessWidget {
+  final String genre;
+  const Genre({super.key, required this.genre});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(15),
+    return Row(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.purple,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+          child: Row(
+            children: [
+              const Icon(Icons.circle, color: Colors.white, size: 8),
+              const SizedBox(width: 8),
+              Text(genre,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center),
+              const SizedBox(width: 8),
+            ],
+          ),
         ),
-        child: Center(child: Text(genre.name)),
-      ),
+      ],
     );
   }
 }
