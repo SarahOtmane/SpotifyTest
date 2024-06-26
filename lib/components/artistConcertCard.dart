@@ -74,9 +74,11 @@ class ArtistConcertCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: genres
-                        .map((genre) => const Padding(
-                              padding: EdgeInsets.only(bottom: 5),
-                              child: Genre(),
+                        .map((genre) => Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Genre(
+                                genre: genre,
+                              ),
                             ))
                         .toList(),
                   ),

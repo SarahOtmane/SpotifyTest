@@ -31,17 +31,17 @@ List<Concert> concerts = [
     genre: ['rock', 'pop'],
   ),
   Concert(
-    date: '24/08/2024',
-    name: 'TaylorSwift',
+    date: '01/08/2024',
+    name: 'ED Sheeran',
     lien: 'test',
-    lieux: 'La Maroquinnerie, Paris, 75007',
+    lieux: 'La Maroquinnerie, Goussainville, 95190',
     genre: ['rock', 'pop'],
   ),
   Concert(
-    date: '24/08/2024',
-    name: 'TaylorSwift',
+    date: '30/08/2024',
+    name: 'The Weekend',
     lien: 'test',
-    lieux: 'La Maroquinnerie, Paris, 75007',
+    lieux: 'La Maroquinnerie, Boulogne Billancourt, 92100',
     genre: ['rock', 'pop'],
   ),
 ];

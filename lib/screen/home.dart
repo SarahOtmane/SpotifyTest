@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/services/artist.dart';
 import '../components/artistCard.dart';
 import '../data/artistData.dart';
 import '../data/genreData.dart';
@@ -6,16 +7,40 @@ import '../components/searchBar.dart';
 import '../components/color.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController _searchController = TextEditingController();
-  List<Artist> _displayedArtists = artists;
+  final TextEditingController _searchController = TextEditingController();
+
+  List<Artist> _defaultArtistes = [];
+  List<Artist> _displayedArtists = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchArtists();
+  }
+
+  Future<void> _fetchArtists() async {
+    try {
+      final response = await fetchArtist();
+      setState(() {
+        _defaultArtistes =
+            response.map<Artist>((json) => Artist.fromJson(json)).toList();
+        _displayedArtists = _defaultArtistes;
+      });
+    } catch (e) {
+      setState(() {});
+      print('Failed to fetch artists: $e');
+    }
+  }
 
   void _filterArtists(String query) {
-    final filteredArtists = artists.where((artist) {
+    final filteredArtists = _defaultArtistes.where((artist) {
       final artistLower = artist.name.toLowerCase();
       final queryLower = query.toLowerCase();
 
@@ -35,27 +60,23 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchInput(
             controller: _searchController,
             onChanged: _filterArtists,
+            placeholder: 'Chercher un artist',
           ),
           Padding(
-            padding: const EdgeInsets.only(
-                top: 10.0, left: 20.0, right: 0.0, bottom: 0.0),
-            child: Container(
-              height: 50,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: genres
-                      .map((genre) => Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Chip(
-                              label: Text(genre.name),
-                              backgroundColor: AppColors.black,
-                              labelStyle: TextStyle(color: AppColors.white),
-                            ),
-                          ))
-                      .toList(),
-                ),
+            padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: genres
+                    .map((genre) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Chip(
+                            label: Text(genre.name),
+                            backgroundColor: AppColors.black,
+                            labelStyle: const TextStyle(color: AppColors.white),
+                          ),
+                        ))
+                    .toList(),
               ),
             ),
           ),
@@ -67,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ArtistCard(
                   artistName: artist.name,
                   imageUrl: artist.imageName,
-                  genres: artist.genre,
+                  genres: artist.genres,
                   onTap: () {
                     // Gérer la sélection de l'artiste
                   },
@@ -76,7 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-
       ),
     );
   }

@@ -4,8 +4,13 @@ import '../components/color.dart';
 class SearchInput extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
+  final String placeholder;
 
-  SearchInput({required this.controller, required this.onChanged});
+  SearchInput({
+    required this.controller, 
+    required this.onChanged,
+    required this.placeholder
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class SearchInput extends StatelessWidget {
               size: 30.0, // Taille de l'icône
             ),
           ),
-          hintText: 'Chercher un artiste',
+          hintText: placeholder,
           hintStyle: TextStyle(color: AppColors.lightgrey), // Couleur du texte du placeholder
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
