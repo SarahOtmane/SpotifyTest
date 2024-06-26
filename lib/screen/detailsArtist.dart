@@ -1,14 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/color.dart';
+import '../data/concertArtistData.dart';
+import '../data/artistData.dart';
+import '../components/artistConcertCard.dart';
 
 class DetailsArtistScreen extends StatefulWidget {
-  const DetailsArtistScreen({super.key});
+  final Artist artist;
+
+  const DetailsArtistScreen({Key? key, required this.artist}) : super(key: key);
 
   @override
   _DetailsArtistScreenState createState() => _DetailsArtistScreenState();
 }
 
 class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
+  final List<Concert> _displayedConcerts = concerts; 
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavoriteStatus();
+  }
+
+  _loadFavoriteStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isFavorite = prefs.getBool('isFavorite_${widget.artist.id}') ?? false;
+    });
+
+  }
+
+  _toggleFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+    prefs.setBool('isFavorite_${widget.artist.id}', isFavorite);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,14 +47,14 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
       body: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.4,
             width: double.infinity,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('../assets/mj.jpg'),
+                image: NetworkImage(widget.artist.imageName), 
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
@@ -31,83 +62,108 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
             child: Stack(
               children: [
                 Positioned(
-                  top: 20,
+                  top: 50,
                   left: 25,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.25),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 8.0),
-                    child: const Text(
-                      'Mickael Jackson',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                  right: 25,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4.0, horizontal: 8.0),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back, 
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            Text(
+                              widget.artist.name,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                          size: 40,
+                          color: isFavorite ?  AppColors.primary : Colors.white,
+                        ),
+                        onPressed: _toggleFavorite,
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(
                   bottom: 15,
                   left: 25,
                   child: Row(
-                    children: [
-                      Container(
+                    children: widget.artist.genres.map((genre) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Container(
                         decoration: BoxDecoration(
                           color: Colors.purple,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 8.0),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.circle, color: Colors.white, size: 8),
-                            SizedBox(width: 8),
-                            Text('Pop',
-                                style: TextStyle(
+                            const Icon(Icons.circle, color: Colors.white, size: 8),
+                            const SizedBox(width: 8),
+                            Text(genre,
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                                 textAlign: TextAlign.center),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                           ],
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.purple,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 8.0),
-                        child: const Row(
-                          children: [
-                            Icon(Icons.circle, color: Colors.white, size: 8),
-                            SizedBox(width: 8),
-                            Text('Legend',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center),
-                            SizedBox(width: 8),
-                          ],
-                        ),
-                      ),
-                    ],
+                    )).toList(),
                   ),
                 ),
               ],
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              'This is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image his is a full-width text below the image.',
+              widget.artist.description,
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.start,
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _displayedConcerts.length,
+              itemBuilder: (context, index) {
+                final concert = _displayedConcerts[index];
+                return ArtistConcertCard(
+                  concertName: concert.name,
+                  genres: concert.genre,
+                  date: concert.date,
+                  lieux: concert.lieux,
+                  lien: concert.lien,
+                  onTap: () {
+                    // Gérer la sélection du concert
+                  },
+                );
+              },
             ),
           ),
         ],
