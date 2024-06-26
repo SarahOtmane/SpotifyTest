@@ -8,7 +8,8 @@ class ArtistCard extends StatelessWidget {
   final List<String> genres;
   final VoidCallback onTap;
 
-  ArtistCard({
+  const ArtistCard({
+    super.key,
     required this.artistName,
     required this.imageUrl,
     required this.genres,
@@ -34,11 +35,11 @@ class ArtistCard extends StatelessWidget {
           children: [
             const SizedBox(width: 10),
             CircleAvatar(
-              backgroundImage: AssetImage(
+              backgroundImage: NetworkImage(
                   imageUrl), // Utilisation de AssetImage pour charger l'image depuis assets
               radius: 30, // Rayon du cercle
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 15),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +53,11 @@ class ArtistCard extends StatelessWidget {
                   Wrap(
                     spacing: 5.0,
                     runSpacing: 5.0,
-                    children: genres.map((genre) => const Genre()).toList(),
+                    children: genres
+                        .map((genre) => Genre(
+                              genre: genre,
+                            ))
+                        .toList(),
                   )
                 ],
               ),

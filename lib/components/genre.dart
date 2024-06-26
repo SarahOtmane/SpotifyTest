@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Genre extends StatelessWidget {
-  const Genre({super.key});
+  final String genre;
+  const Genre({super.key, required this.genre});
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +14,16 @@ class Genre extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-          child: const Row(
+          child: Row(
             children: [
-              Icon(Icons.circle, color: Colors.white, size: 8),
-              SizedBox(width: 8),
-              Text('Legend',
-                  style: TextStyle(
+              const Icon(Icons.circle, color: Colors.white, size: 8),
+              const SizedBox(width: 8),
+              Text(genre,
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
             ],
           ),
         ),
