@@ -4,8 +4,9 @@ import 'fetch_api.dart';
 Future<dynamic> fetchArtist() async {
   ApiService apiService = ApiService();
   try {
-    final response = await apiService.get('/attractions');
-    return response;
+    final response = await apiService
+        .get('/attractions', params: {"classificationName": "Music"});
+    return response["_embedded"]["attractions"];
   } catch (e) {
     throw Exception('Failed to fetch data: $e');
   }
@@ -18,7 +19,7 @@ Future<dynamic> fetchArtistDetail({String? params}) async {
     try {
       final response =
           await apiService.get('/attractions', params: {'id': params});
-      return response;
+      return response["_embedded"]["attractions"][0];
     } catch (e) {
       throw Exception('Failed to fetch data: $e');
     }

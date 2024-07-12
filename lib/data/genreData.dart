@@ -1,4 +1,3 @@
-
 class Genre {
   final String name;
   final String id;
@@ -28,6 +27,14 @@ List<Genre> genres = [
   ),
   Genre(
     name: 'techno',
+    id: '5',
+  ),
+  Genre(
+    name: 'rock',
+    id: '5',
+  ),
+  Genre(
+    name: 'rock & roll',
     id: '5',
   ),
 ];

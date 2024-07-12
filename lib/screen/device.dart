@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/screen/like.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:spotify/screen/listArtist.dart';
+
 
 import 'home.dart';
 import 'concerts.dart';
 import '../components/color.dart';
 
 class DeviceScreen extends StatefulWidget {
+  const DeviceScreen({super.key});
+
   @override
   _DeviceScreenState createState() => _DeviceScreenState();
 }
@@ -15,10 +17,9 @@ class DeviceScreen extends StatefulWidget {
 class _DeviceScreenState extends State<DeviceScreen> {
   int _currentScreen = 0;
   final List<Widget> _screenList = [
-    const HomeScreen(),
-    const LikeScreen(),
-    const ConcertsScreen(),
-    ListArtistScreen(),
+    HomeScreen(),
+    LikeScreen(),
+    ConcertsScreen(),
   ];
 
   @override
@@ -28,18 +29,19 @@ class _DeviceScreenState extends State<DeviceScreen> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.black,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.primary, 
+        selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.white,
-        iconSize: 35,
         currentIndex: _currentScreen,
         onTap: onTabTapped,
-        showSelectedLabels: false, 
-        showUnselectedLabels: false, 
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: const [
-          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
-          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.heart), label: 'Artists likés'),
-          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.music), label: 'Concerts'),
-          BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.list), label: 'lists'),
+          BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.house, size: 25.0,), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: FaIcon(Icons.favorite, size: 30.0), label: 'Artists likés'),
+          BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.music, size: 25.0,), label: 'Concerts'),
         ],
       ),
     );
