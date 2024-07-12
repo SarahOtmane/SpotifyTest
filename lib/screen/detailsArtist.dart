@@ -16,27 +16,42 @@ class DetailsArtistScreen extends StatefulWidget {
 
 class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
   final List<Concert> _displayedConcerts = concerts;
-  bool isFavorite = false;
+  List<String> likedArtistIds = [];
 
   @override
   void initState() {
     super.initState();
-    _loadFavoriteStatus();
+    _loadLikedArtists();
   }
 
-  _loadFavoriteStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isFavorite = prefs.getBool('isFavorite_${widget.artist.id}') ?? false;
-    });
+  Future<void> _loadLikedArtists() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        likedArtistIds = prefs.getStringList('liked_artists')?.toList() ?? [];
+        print('Loaded liked artists: $likedArtistIds');
+      });
+    } catch (e) {
+      print('Error loading liked artists: $e');
+    }
   }
 
-  _toggleFavorite() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-    prefs.setBool('isFavorite_${widget.artist.id}', isFavorite);
+  Future<void> _toggleLike(String artistId) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        if (likedArtistIds.contains(artistId)) {
+          likedArtistIds.remove(artistId);
+        } else {
+          likedArtistIds.add(artistId);
+        }
+        prefs.setStringList('liked_artists',
+            likedArtistIds.map((id) => id.toString()).toList());
+        print('Updated liked artists: $likedArtistIds');
+      });
+    } catch (e) {
+      print('Error toggling like: $e');
+    }
   }
 
   @override
@@ -104,9 +119,11 @@ class _DetailsArtistScreenState extends State<DetailsArtistScreen> {
                         icon: Icon(
                           Icons.favorite,
                           size: 40,
-                          color: isFavorite ? AppColors.primary : Colors.white,
+                          color: likedArtistIds.contains(widget.artist.id)
+                              ? AppColors.primary
+                              : Colors.white,
                         ),
-                        onPressed: _toggleFavorite,
+                        onPressed: () => _toggleLike(widget.artist.id),
                       ),
                     ],
                   ),

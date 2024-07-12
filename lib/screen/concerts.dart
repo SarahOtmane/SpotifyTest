@@ -4,7 +4,7 @@ import 'package:spotify/components/searchBar.dart';
 import 'package:spotify/data/artistData.dart';
 import 'package:spotify/data/concertData.dart';
 import 'package:spotify/services/artist.dart'; // Assurez-vous d'importer Artist ici
-import 'package:spotify/services/event.dart'; // Assurez-vous d'importer fetchEventLocation ici
+import 'package:spotify/services/concert.dart'; // Assurez-vous d'importer fetchEventLocation ici
 import 'package:url_launcher/url_launcher.dart'; // Importez le package url_launcher
 
 class ConcertsScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _ConcertsScreenState extends State<ConcertsScreen> {
 
   Future<void> _fetchConcert() async {
     try {
-      final response = await fetchEventLocation();
+      final response = await fetchConcertLocation();
       List<Concert> concerts = [];
 
       // Parcourir chaque élément de la liste response

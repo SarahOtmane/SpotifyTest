@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/components/color.dart';
 
-class ArtistImageCard extends StatelessWidget {
+class artistImageCard extends StatelessWidget {
   final String artistName;
   final String imagePath; // This should be an external URL
   final VoidCallback onTap;
 
-  const ArtistImageCard({
+  const artistImageCard({
     super.key,
     required this.artistName,
     required this.imagePath,

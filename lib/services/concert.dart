@@ -1,13 +1,13 @@
 import 'fetch_api.dart';
 
 // fetch all event with concerns one artist
-Future<dynamic> fetchEvent({String? params}) async {
+Future<dynamic> fetchConcert({String? params}) async {
   ApiService apiService = ApiService();
   if (params != null) {
     try {
       var response =
           await apiService.get("/events", params: {"attractionId": params});
-      return response;
+      return response["_embedded"]["events"];
     } catch (e) {
       throw Exception('Failed to fetch data: $e');
     }
@@ -17,12 +17,11 @@ Future<dynamic> fetchEvent({String? params}) async {
 }
 
 // fetch event based on city
-Future<dynamic> fetchEventLocation({String? params}) async {
+Future<dynamic> fetchConcertLocation({String? params}) async {
   ApiService apiService = ApiService();
   // if (params != null) {
   try {
     var response = await apiService.get("/events", params: {
-      // TODO à changer
       "locale": "fr-fr",
       "classificationId": "KZFzniwnSyZfZ7v7nJ",
       "size": 10,
